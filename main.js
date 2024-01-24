@@ -7,9 +7,10 @@
         'ターン目',
         '勝ち!',
         'ゲームオーバー',
+        'やくそうを飲んだ'
     ]
     let fitness = 100;
-    let enemyFitness = 150;
+    let enemyFitness = 300;
     let count = 0;
     const countMessage = document.getElementById('count');
     const fitnessResult = document.getElementById('fitness');
@@ -31,6 +32,8 @@
             fitnessResult.classList.add('twentyofless');
         } else if ( fitness <= 0 ) {
             console.log(`${msgArray[5]}`);
+        } else {
+            fitnessResult.classList.add('fitness');
         }
     }
     function enemyAttack() {
@@ -49,8 +52,18 @@
         message.textContent = `${msgArray[1]}${r_attack}のダメージ`;
         setTimeout(()=>{
             enemyAttack();
-
         },1000);
-        
+    },false);
+
+    const recoveryButton = document.getElementById('recovery-button');
+    recoveryButton.addEventListener('click', ()=> {
+        ++count;
+        const recovery = 20;
+        fitness = fitness + recovery;
+        update();
+        message.textContent = `${msgArray[6]}を飲んだ！${recovery}回復した！`;
+        setTimeout(()=>{
+            enemyAttack();
+        },1000);
     },false);
 }
