@@ -7,17 +7,19 @@
         'ターン目',
         '勝ち!',
         'ゲームオーバー',
-        'やくそうを飲んだ'
+        'やくそうを飲んだ',
+        'やくそう',
     ]
     let fitness = 100;
     let enemyFitness = 300;
     let count = 0;
-    
+    let remainHerbs = 3;
     const countMessage = document.getElementById('count');
     const fitnessResult = document.getElementById('fitness');
     const enemyFitnessResult = document.getElementById('enemy-fitness');
     const recoveryButton = document.getElementById('recovery-button');
     const attackButton = document.getElementById('attack-button');
+    const restHerbs = document.getElementById('rest-herbs');
     const message = document.querySelector('span');
     message.textContent = msgArray[0];
     update();
@@ -25,6 +27,7 @@
     function update() {
         fitnessResult.textContent = `体力:${fitness}`;
         enemyFitnessResult.textContent = `敵の体力:${enemyFitness}`;
+        restHerbs.textContent = `${msgArray[7]}×${remainHerbs}`;
         countMessage.textContent = `${count}${msgArray[3]}`;
         if ( enemyFitness <= 0 ) {
             console.log(`${msgArray[4]}`);
@@ -38,6 +41,8 @@
         } else {
             fitnessResult.classList.add('fitness');
         }
+
+        
     }
     function enemyAttack() {
         const r_enemyAttack = Math.floor(Math.random()*30);
@@ -46,7 +51,7 @@
         update();
     }
 
-    const btnDisabled = (e) => {
+    const btnDisabled = () => {
         console.log('要素をdisabledにしました');
         attackButton.disabled = true;
         recoveryButton.disabled = true;
@@ -54,9 +59,13 @@
             console.log('desabledを解除します');
             attackButton.disabled = false;
             recoveryButton.disabled = false;
+            if ( remainHerbs === 0 ) {
+                recoveryButton.disabled = 'none';
+            }
         },3000);
     }
-    
+
+   
     attackButton.addEventListener('click', (e)=> {
         ++count;
         const r_attack = Math.floor(Math.random()*40);
@@ -69,9 +78,9 @@
         },1000);
     },false);
 
-    
-    recoveryButton.addEventListener('click', ()=> {
+    function recoveryFunc() {
         ++count;
+        --remainHerbs;
         const recovery = 20;
         fitness = fitness + recovery;
         btnDisabled();
@@ -79,6 +88,12 @@
         message.textContent = `${msgArray[6]}を飲んだ！${recovery}回復した！`;
         setTimeout(()=>{
             enemyAttack();
+            
         },1000);
+    }
+    recoveryButton.addEventListener('click', (e)=> {
+        recoveryFunc();
+
+
     },false);
 }
