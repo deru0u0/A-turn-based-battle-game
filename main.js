@@ -12,9 +12,12 @@
     let fitness = 100;
     let enemyFitness = 300;
     let count = 0;
+    
     const countMessage = document.getElementById('count');
     const fitnessResult = document.getElementById('fitness');
     const enemyFitnessResult = document.getElementById('enemy-fitness');
+    const recoveryButton = document.getElementById('recovery-button');
+    const attackButton = document.getElementById('attack-button');
     const message = document.querySelector('span');
     message.textContent = msgArray[0];
     update();
@@ -42,12 +45,23 @@
         message.textContent = `${msgArray[2]}${r_enemyAttack}のダメージを受けた`;
         update();
     }
-    const attackButton = document.getElementById('attack-button');
 
-    attackButton.addEventListener('click', ()=> {
+    const btnDisabled = (e) => {
+        console.log('要素をdisabledにしました');
+        attackButton.disabled = true;
+        recoveryButton.disabled = true;
+        setTimeout(()=> {
+            console.log('desabledを解除します');
+            attackButton.disabled = false;
+            recoveryButton.disabled = false;
+        },3000);
+    }
+    
+    attackButton.addEventListener('click', (e)=> {
         ++count;
         const r_attack = Math.floor(Math.random()*40);
         enemyFitness = enemyFitness - r_attack;
+        btnDisabled();
         update();
         message.textContent = `${msgArray[1]}${r_attack}のダメージ`;
         setTimeout(()=>{
@@ -55,11 +69,12 @@
         },1000);
     },false);
 
-    const recoveryButton = document.getElementById('recovery-button');
+    
     recoveryButton.addEventListener('click', ()=> {
         ++count;
         const recovery = 20;
         fitness = fitness + recovery;
+        btnDisabled();
         update();
         message.textContent = `${msgArray[6]}を飲んだ！${recovery}回復した！`;
         setTimeout(()=>{
