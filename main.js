@@ -1,14 +1,20 @@
 'use strict';
 {
     const msgArray = [
-        'ボタンを押して戦闘を開始してください。',
-        '〇〇の攻撃。',
-        '〇〇からの攻撃！',
+        'まもののけはいがたちこめている',
+        'ゆうしゃの　こうげき！',
+        'ゆうしゃは　スライムから',
         'ターン目',
-        '勝ち!',
+        'スライムをたおした！',
         'ゲームオーバー',
         'やくそうを飲んだ',
         'やくそう',
+        'スライムがあわられた！',
+        'かいしんの　いちげき！　スライムに',
+        'ミス！　スライムにダメージを　あたえられない！',
+        'つうこんの　いちげき！　ゆうしゃはスライムの　ダメージをうけた！',
+        'ミス！　ゆうしゃはダメージを　うけない！',
+
     ]
     let fitness = 100;
     let enemyFitness = 300;
@@ -51,18 +57,21 @@
         update();
     }
 
+        attackButton.disabled = true;
+        recoveryButton.disabled = true;
+
     const btnDisabled = () => {
-        console.log('要素をdisabledにしました');
+        
         attackButton.disabled = true;
         recoveryButton.disabled = true;
         setTimeout(()=> {
-            console.log('desabledを解除します');
+            
             attackButton.disabled = false;
             recoveryButton.disabled = false;
             if ( remainHerbs === 0 ) {
                 recoveryButton.disabled = 'none';
             }
-        },3000);
+        },1500);
     }
 
    
@@ -72,7 +81,7 @@
         enemyFitness = enemyFitness - r_attack;
         btnDisabled();
         update();
-        message.textContent = `${msgArray[1]}${r_attack}のダメージ`;
+        message.textContent = `${msgArray[1]}${r_attack}のダメージ！！`;
         setTimeout(()=>{
             enemyAttack();
         },1000);
@@ -93,7 +102,12 @@
     }
     recoveryButton.addEventListener('click', (e)=> {
         recoveryFunc();
+    },false);
 
-
+    document.getElementById('start-game').addEventListener('click',(e)=> {
+        e.target.classList.add('deleteButton');
+        message.textContent = msgArray[8];
+        attackButton.disabled = false;
+        recoveryButton.disabled = false;
     },false);
 }

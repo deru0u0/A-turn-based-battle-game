@@ -11,3 +11,6 @@ body {
 .twentyofless {
     color:#ff0000;
 }
+.deleteButton {
+    display:none;
+}
