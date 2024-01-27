@@ -1,8 +1,9 @@
 body {
     background-color: #444;
     color: #ddd;
+
 }
-.fitness {
+.hitpoint {
     color:#00ff2f;
 }
 .fiftyofless {
@@ -13,4 +14,61 @@ body {
 }
 .deleteButton {
     display:none;
+}
+.message-container {
+    width: 100%;
+    height:100%;
+    margin-top:5%;
+    font-weight: bold;
+}
+.message {
+    font-size: 12px;
+    text-align: center;
+}
+
+.container {
+    display:flex;
+    height:100%;
+    margin:0;
+}
+.status-wrapper {
+    border: 1px solid #fff;
+    width:50%;
+}
+.status-wrapper > p {
+    margin:0;
+}
+.commands-wrapper {
+   border: 1px solid #fff;
+   width:50%;
+}
+.commands-wrapper > p {
+    margin:0;
+    text-align:center;
+}
+.enemy-wrapper > p {
+    margin:0;
+}
+.bottom-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+}
+
+.enemy-container {
+    display: flex;
+}
+.enemy-wrapper {
+    width: 50%;
+}
+.enemy-image-wrapper {
+    border:1px solid #ddd;
+    width: 50%;
+    height: 100px;
+}
+.enemy-image {
+    object-fit:contain;
+    width:100%;
+    height: 100%;
+    
 }

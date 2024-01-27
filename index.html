@@ -7,20 +7,42 @@
     <title>Document</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        
+    </header>
+   
     <main>
+
         <p id="count"></p>
-        <p id="fitness" class="fitness"></p>
-        <p id="enemy-fitness"></p>
-        <span></span>
-        <p>
-            <input type="button" id="attack-button" value="戦う">
-            <input type="button" id="recovery-button" value="回復">
-        </p>
-        <span id="rest-herbs"></span>
+        <div class="enemy-container">
+            <div class="enemy-wrapper">
+                <p id="enemyName"></p>
+                <p id="enemyHitpoint"></p>
+            </div>
+            <div class="enemy-image-wrapper">
+                <img src="./1.png" class="enemy-image">
+            </div>
+        </div>
+        <div class="message-container">
+            <p id="message" class="message"></p>
+        </div>
+        <div class="container">
+            <div class="status-wrapper">
+                <p id="userName"></p>
+                <p id="hitpoint" class="hitpoint"></p>
+                <p id="magic" class=""></p>
+            </div>
+            <div class="commands-wrapper">
+                <p id="attackButton"></p>
+                <p id="recoverButton"></p>
+                <p id="magicButton"></p>
+            </div>
+        </div>
+        <div class="bottom-contaner"></div>
+        <!-- <span id="rest-herbs"></span>
         <div>
             <input type="button" id="start-game" value="洞窟を探検する">
-        </div>
+        </div> -->
     </main>
     <script src="./main.js"></script>
 </body>

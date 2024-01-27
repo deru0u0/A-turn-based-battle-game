@@ -1,113 +1,133 @@
 'use strict';
 {
-    const msgArray = [
-        'まもののけはいがたちこめている',
-        'ゆうしゃの　こうげき！',
-        'ゆうしゃは　スライムから',
-        'ターン目',
-        'スライムをたおした！',
-        'ゲームオーバー',
-        'やくそうを飲んだ',
-        'やくそう',
-        'スライムがあわられた！',
-        'かいしんの　いちげき！　スライムに',
-        'ミス！　スライムにダメージを　あたえられない！',
-        'つうこんの　いちげき！　ゆうしゃはスライムの　ダメージをうけた！',
-        'ミス！　ゆうしゃはダメージを　うけない！',
-
-    ]
-    let fitness = 100;
-    let enemyFitness = 300;
-    let count = 0;
-    let remainHerbs = 3;
-    const countMessage = document.getElementById('count');
-    const fitnessResult = document.getElementById('fitness');
-    const enemyFitnessResult = document.getElementById('enemy-fitness');
-    const recoveryButton = document.getElementById('recovery-button');
-    const attackButton = document.getElementById('attack-button');
-    const restHerbs = document.getElementById('rest-herbs');
-    const message = document.querySelector('span');
-    message.textContent = msgArray[0];
-    update();
-
-    function update() {
-        fitnessResult.textContent = `体力:${fitness}`;
-        enemyFitnessResult.textContent = `敵の体力:${enemyFitness}`;
-        restHerbs.textContent = `${msgArray[7]}×${remainHerbs}`;
-        countMessage.textContent = `${count}${msgArray[3]}`;
-        if ( enemyFitness <= 0 ) {
-            console.log(`${msgArray[4]}`);
-        }
-        if ( fitness <= 50) {
-            fitnessResult.classList.add('fiftyofless');
-        } else if ( fitness <= 20 ) {
-            fitnessResult.classList.add('twentyofless');
-        } else if ( fitness <= 0 ) {
-            console.log(`${msgArray[5]}`);
-        } else {
-            fitnessResult.classList.add('fitness');
-        }
-
-        
-    }
-    function enemyAttack() {
-        const r_enemyAttack = Math.floor(Math.random()*30);
-        fitness = fitness - r_enemyAttack;
-        message.textContent = `${msgArray[2]}${r_enemyAttack}のダメージを受けた`;
-        update();
-    }
-
-        attackButton.disabled = true;
-        recoveryButton.disabled = true;
-
-    const btnDisabled = () => {
-        
-        attackButton.disabled = true;
-        recoveryButton.disabled = true;
-        setTimeout(()=> {
-            
-            attackButton.disabled = false;
-            recoveryButton.disabled = false;
-            if ( remainHerbs === 0 ) {
-                recoveryButton.disabled = 'none';
+    const battleObj = {
+        userName: 'ゆうしゃ',
+        hitpoint: 100,
+        magic: 20,
+        enemyHitpoint: 300,
+        count:0,
+        tools:[
+            ['やくそう', 3, 20],
+        ],
+        enemy: [
+            ['スライム'],
+            [],
+            [],
+        ],
+        commands : [
+            ['こうげき'],
+            ['かいふく'],
+            ['まほう'],
+        ],
+        message : [
+            ['まもののけはいがたちこめている'],
+            [`ゆうしゃの こうげき!モンスターに`],
+            ['かいしんの いちげき！'],
+            ['ミス！'],
+            ['ゆうしゃに'],
+            []
+        ],
+        update: function() {
+            let hitpoint = document.getElementById('hitpoint');
+            let enemyHitpoint = document.getElementById('enemyHitpoint');
+            let magic = document.getElementById('magic');
+            let count = document.getElementById('count');
+            let result = this.hitpoint;
+            hitpoint.textContent = `体力：${this.hitpoint}`;
+            enemyHitpoint.textContent = `敵の体力：${this.enemyHitpoint}`;
+            magic.textContent = `魔力：${this.magic}`;
+            count.textContent = `${this.count}ターン目`;
+            if ( result >= 50 ) {
+                hitpoint.classList.add('hitpoint');
+            } else if ( result >= 20 ) {
+                hitpoint.classList.add('fiftyofless');
+            } else if ( result >= 1) {
+                hitpoint.classList.add('twentyofless');
+            } else {
+                console.log('ゲームオーバー');
             }
-        },1500);
-    }
 
-   
-    attackButton.addEventListener('click', (e)=> {
-        ++count;
-        const r_attack = Math.floor(Math.random()*40);
-        enemyFitness = enemyFitness - r_attack;
-        btnDisabled();
-        update();
-        message.textContent = `${msgArray[1]}${r_attack}のダメージ！！`;
-        setTimeout(()=>{
-            enemyAttack();
-        },1000);
-    },false);
-
-    function recoveryFunc() {
-        ++count;
-        --remainHerbs;
-        const recovery = 20;
-        fitness = fitness + recovery;
-        btnDisabled();
-        update();
-        message.textContent = `${msgArray[6]}を飲んだ！${recovery}回復した！`;
-        setTimeout(()=>{
-            enemyAttack();
+        },
+        attack: function() {
+            const r_math = Math.floor(Math.random()*40);
+            ++this.count;
             
-        },1000);
-    }
-    recoveryButton.addEventListener('click', (e)=> {
-        recoveryFunc();
-    },false);
+            if ( r_math === 40 ) {
+                message.textContent = `かいしんの いちげき！まものに ${r_math}のダメージ！`;
+            } else if ( r_math === 0 ) {
+                const r_message = Math.floor(Math.random()*3)+1;
+                switch ( r_message ) {
+                    case 1:
+                        message.textContent =`ミス! まものに ダメージを あたえられない！`;
+                    break;
+                    case 2:
+                        message.textContent =`まものは みをまもっている!`;
+                    break;
+                    case 3:
+                        message.textContent =`まものは ひらりと みをかわした!`;
+                    break;
+                    case 4:
+                        message.textContent = `まものは すばやく みをかわした！`
+                    break;
+                }
+            } else {
+                message.textContent = `ゆうしゃの こうげき! まものに ${r_math}のダメージ！`;
+            }
+            this.enemyHitpoint = this.enemyHitpoint - r_math;
+            this.update();
+            setTimeout(()=> {
+                this.enemyAttack();
+            },1000);
+        },
+        recovery: function() {
+            ++this.count;
+            this.hitpoint = this.hitpoint + this.tools[0][2];
+            message.textContent = `${this.tools[0][0]}をのんだ！ \n ${this.tools[0][2]}かいふくした!`;
+            this.update();
+            setTimeout(()=> {
+                this.enemyAttack();
+            },2000);
+        },
+        enemyAttack: function() {
+            const r_math = Math.floor(Math.random()*30);
+            this.hitpoint = this.hitpoint - r_math;
+           if ( r_math === 30 ) {
+            message.textContent = `つうこんの いちげき！ ゆうしゃは${r_math}のダメージを うけた！`;
+           } else if ( r_math === 0 ) {
+            message.textContent = `ミス！ ゆうしゃはダメージを うけない！`;
+           } else {
+            message.textContent = `まものの こうげき！ ゆうしゃは ${r_math}のダメージをうけた！`;
+           }
+            this.update();
+        },
+        init: function() {
+            const userName = document.getElementById('userName');
+            const enemyName = document.getElementById('enemyName');
+            const attackButton = document.getElementById('attackButton');
+            const recoverButton = document.getElementById('recoverButton');
+            const magicButton = document.getElementById('magicButton');
+            const message = document.getElementById('message');
+            message.textContent = battleObj.message[0];
+            userName.textContent = `名前：${this.userName}`;
+            enemyName.textContent = `${this.enemy[0]}`;
+            
+            attackButton.disabled = true;
+            recoverButton.disabled = true;
+            magicButton.disabled = true;
 
-    document.getElementById('start-game').addEventListener('click',(e)=> {
-        e.target.classList.add('deleteButton');
-        message.textContent = msgArray[8];
-        attackButton.disabled = false;
-        recoveryButton.disabled = false;
-    },false);
+            
+        },
+        disabled: function() {
+            attackButton.disabled = true;
+            recoverButton.disabled = true;
+            magicButton.disabled = true;
+
+            setTimeout(()=> {
+                attackButton.disabled = false;
+                recoverButton.disabled = false;
+                magicButton.disabled = false;   
+            },2000);
+        }
+
+    }
 }
