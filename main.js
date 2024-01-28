@@ -138,22 +138,29 @@
   
     
     }
-            // const p = document.createElement('p');
-            // const div = document.getElementById('startButtonContainer');
-            // const startButton = document.getElementById('startButtonContainer');
-            // div.appendChild(p);
-            // p.textContent = 'まわりをたんけんする';
-            // p.classList.add('start-button');
-            // startButton.addEventListener('click', (e)=> {
-            //     battleObj.init();
-            //     battleObj.update();
-            //     div.classList.add('delete-button');
-            // },false);
+            const p = document.createElement('p');
+            const div = document.getElementById('startButtonContainer');
+            const startButton = document.getElementById('startButtonContainer');
+            const commandsWrapper = document.getElementById('commandsWrapper');
+            const container = document.getElementById('container');
+            commandsWrapper.style.visibility = 'hidden';
+            container.style.visibility = 'hidden';
+        
+            div.appendChild(p);
+            p.textContent = 'まわりをたんけんする';
+            p.classList.add('start-button');
+            startButton.addEventListener('click', (e)=> {
+                battleObj.init();
+                battleObj.update();
+                commandsWrapper.style.visibility = 'visible';
+                container.style.visibility = 'visible';
+                div.classList.add('delete-button');
+            },false);
             
 
 
-            battleObj.init();
-            battleObj.update();
+            // battleObj.init();
+            // battleObj.update();
 
     attackButton.addEventListener('click', () => {
         battleObj.attack();
