@@ -43,6 +43,7 @@
 
             if ( this.herbs === 0 ) {
                 recoverButton.disabled = true;
+                herbs.style.color = 'red';
             }
             if ( result <=  0 ) {
                 console.log('ゲームオーバー');
@@ -142,6 +143,7 @@
             const div = document.getElementById('startButtonContainer');
             const startButton = document.getElementById('startButtonContainer');
             const commandsWrapper = document.getElementById('commandsWrapper');
+            const statusWrapper = document.getElementById('statusWrapper');
             const container = document.getElementById('container');
             commandsWrapper.style.visibility = 'hidden';
             container.style.visibility = 'hidden';
@@ -154,6 +156,9 @@
                 battleObj.update();
                 commandsWrapper.style.visibility = 'visible';
                 container.style.visibility = 'visible';
+                commandsWrapper.style.border = 'solid 1px #ddd';
+                statusWrapper.style.border = 'solid 1px #ddd';
+                
                 div.classList.add('delete-button');
             },false);
             
