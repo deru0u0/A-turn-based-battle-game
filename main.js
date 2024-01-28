@@ -4,13 +4,13 @@
         userName: 'ゆうしゃ',
         hitpoint: 100,
         magic: 20,
-        enemyHitpoint: 300,
+        herbs:3,
         count:0,
         tools:[
-            ['やくそう', 3, 20],
+            ['やくそう',3,20]
         ],
         enemy: [
-            ['スライム'],
+            ['スライム',300],
             [],
             [],
         ],
@@ -20,7 +20,7 @@
             ['まほう'],
         ],
         message : [
-            ['まもののけはいがたちこめている'],
+            ['モンスターが あらわれた！'],
             [`ゆうしゃの こうげき!モンスターに`],
             ['かいしんの いちげき！'],
             ['ミス！'],
@@ -32,18 +32,19 @@
             let enemyHitpoint = document.getElementById('enemyHitpoint');
             let magic = document.getElementById('magic');
             let count = document.getElementById('count');
-            let result = this.hitpoint;
+            let herbs = document.getElementById('herbs');
+            herbs.textContent = `やくそう×${this.herbs}個`;
             hitpoint.textContent = `体力：${this.hitpoint}`;
-            enemyHitpoint.textContent = `敵の体力：${this.enemyHitpoint}`;
+            enemyHitpoint.textContent = `敵の体力：${this.enemy[0][1]}`;
             magic.textContent = `魔力：${this.magic}`;
             count.textContent = `${this.count}ターン目`;
-            if ( result >= 50 ) {
-                hitpoint.classList.add('hitpoint');
-            } else if ( result >= 20 ) {
-                hitpoint.classList.add('fiftyofless');
-            } else if ( result >= 1) {
-                hitpoint.classList.add('twentyofless');
-            } else {
+            let result = this.hitpoint;
+            const recoverButton = document.getElementById('recoverButton');
+
+            if ( this.herbs === 0 ) {
+                recoverButton.disabled = true;
+            }
+            if ( result <=  0 ) {
                 console.log('ゲームオーバー');
             }
 
@@ -73,19 +74,24 @@
             } else {
                 message.textContent = `ゆうしゃの こうげき! まものに ${r_math}のダメージ！`;
             }
-            this.enemyHitpoint = this.enemyHitpoint - r_math;
+            this.enemy[0][1] = this.enemy[0][1] - r_math;
             this.update();
+            this.changeButton();
             setTimeout(()=> {
                 this.enemyAttack();
+                this.update();
             },1000);
         },
         recovery: function() {
             ++this.count;
+            this.herbs = this.herbs - 1;
             this.hitpoint = this.hitpoint + this.tools[0][2];
             message.textContent = `${this.tools[0][0]}をのんだ！ \n ${this.tools[0][2]}かいふくした!`;
             this.update();
+            this.changeButton();
             setTimeout(()=> {
                 this.enemyAttack();
+                this.update();
             },2000);
         },
         enemyAttack: function() {
@@ -107,17 +113,18 @@
             const recoverButton = document.getElementById('recoverButton');
             const magicButton = document.getElementById('magicButton');
             const message = document.getElementById('message');
+            const enemyImage = document.getElementById('enemyImage');
+            enemyImage.src = './1.png';
+            enemyImage.classList.add('enemy-image');
             message.textContent = battleObj.message[0];
             userName.textContent = `名前：${this.userName}`;
-            enemyName.textContent = `${this.enemy[0]}`;
-            
-            attackButton.disabled = true;
-            recoverButton.disabled = true;
-            magicButton.disabled = true;
-
-            
+            enemyName.textContent = `${this.enemy[0][0]}`;
+            attackButton.textContent = this.commands[0];
+            recoverButton.textContent = this.commands[1];
+            magicButton.textContent = this.commands[2];
         },
-        disabled: function() {
+
+        changeButton: function() {
             attackButton.disabled = true;
             recoverButton.disabled = true;
             magicButton.disabled = true;
@@ -125,9 +132,42 @@
             setTimeout(()=> {
                 attackButton.disabled = false;
                 recoverButton.disabled = false;
-                magicButton.disabled = false;   
+                magicButton.disabled = false; 
             },2000);
-        }
-
+        },
+  
+    
     }
+            // const p = document.createElement('p');
+            // const div = document.getElementById('startButtonContainer');
+            // const startButton = document.getElementById('startButtonContainer');
+            // div.appendChild(p);
+            // p.textContent = 'まわりをたんけんする';
+            // p.classList.add('start-button');
+            // startButton.addEventListener('click', (e)=> {
+            //     battleObj.init();
+            //     battleObj.update();
+            //     div.classList.add('delete-button');
+            // },false);
+            
+
+
+            battleObj.init();
+            battleObj.update();
+
+    attackButton.addEventListener('click', () => {
+        battleObj.attack();
+    },false);
+
+    recoverButton.addEventListener('click',()=> {
+        battleObj.recovery();
+    },false);
+
+
+    magicButton.addEventListener('click',()=> {
+        console.log('clicked');
+    },false);
+
+
 }
+            

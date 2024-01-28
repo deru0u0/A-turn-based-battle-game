@@ -20,29 +20,36 @@
                 <p id="enemyHitpoint"></p>
             </div>
             <div class="enemy-image-wrapper">
-                <img src="./1.png" class="enemy-image">
+                <img id='enemyImage'>
             </div>
         </div>
         <div class="message-container">
-            <p id="message" class="message"></p>
+            <p id="message" class="message">まもののけはいが たちこめている</p>
         </div>
         <div class="container">
             <div class="status-wrapper">
+                <p id="userLevel"></p>
                 <p id="userName"></p>
                 <p id="hitpoint" class="hitpoint"></p>
                 <p id="magic" class=""></p>
             </div>
             <div class="commands-wrapper">
-                <p id="attackButton"></p>
-                <p id="recoverButton"></p>
-                <p id="magicButton"></p>
+                <input type="button" value="攻撃" id="attackButton">
+                <input type="button" value="かいふく" id="recoverButton">
+                <input type="button" value="まほう" id="magicButton">
             </div>
         </div>
-        <div class="bottom-contaner"></div>
-        <!-- <span id="rest-herbs"></span>
-        <div>
-            <input type="button" id="start-game" value="洞窟を探検する">
-        </div> -->
+        <div class="container">
+            <div class="item-wrapper">
+                <ul>
+                    <span>所持数：</span>
+                    <li id="herbs"></li>
+                    </ul>
+            </div>
+         
+        <div id="startButtonContainer" class="start-button-contaier">
+
+        </div>
     </main>
     <script src="./main.js"></script>
 </body>
