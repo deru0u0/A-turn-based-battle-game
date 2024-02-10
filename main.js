@@ -42,7 +42,7 @@
             const recoverButton = document.getElementById('recoverButton');
 
             if ( this.herbs === 0 ) {
-                recoverButton.disabled = true;
+                recoverButton.classList.add('passive-button');
                 herbs.style.color = 'red';
             }
             if ( result <=  0 ) {
