@@ -8,47 +8,41 @@
 </head>
 <body>
     <header>
-        
+        <h1 class="title" id="Title">header-title</h1>
     </header>
-   
     <main>
-
-        <p id="count"></p>
-        <div class="enemy-container">
-            <div class="enemy-wrapper">
-                <p id="enemyName"></p>
-                <p id="enemyHitpoint"></p>
-            </div>
-            <div class="enemy-image-wrapper">
-                <img id='enemyImage'>
-            </div>
+        <div class="container"></div>
+        <div class="message-area">
+            <span class="message">ここにテキストが入ります。</span>
         </div>
-        <div class="message-container">
-            <p id="message" class="message">まもののけはいが たちこめている</p>
-        </div>
-        <div class="container">
-            <div class="status-wrapper">
-                <p id="userLevel"></p>
-                <p id="userName"></p>
-                <p id="hitpoint" class="hitpoint"></p>
-                <p id="magic" class=""></p>
-            </div>
-            <div class="commands-wrapper">
-                <input type="button" value="攻撃" id="attackButton">
-                <input type="button" value="かいふく" id="recoverButton">
-                <input type="button" value="まほう" id="magicButton">
-            </div>
-        </div>
-        <div class="container">
-            <div class="item-wrapper">
+        <div class="commands-area">
+            <div class="status-area">
                 <ul>
-                    <span>所持数：</span>
-                    <li id="herbs"></li>
-                    </ul>
+                    <li>NAME:</li>
+                    <li>LV:</li>
+                    <li>HITPOINT</li>
+                    <li>MAGIC</li>
+                </ul>
             </div>
-         
-        <div id="startButtonContainer" class="start-button-contaier">
-
+            <div class="button-area">
+                <p class="attack-button">こうげき</p>
+                <p class="magics-button">まほう</p>
+                <p class="skills-button">どうぐ</p>
+            </div>
+        </div>
+        <div class="magics-container">
+            <ul>
+                <li>まほう</li>
+                <li>まほう</li>
+                <li>まほう</li>
+            </ul>
+        </div>
+        <div class="tools-container">
+            <ul>
+                <li>どうぐ</li>
+                <li>どうぐ</li>
+                <li>どうぐ</li>
+            </ul>
         </div>
     </main>
     <script src="./main.js"></script>
