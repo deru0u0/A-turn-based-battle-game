@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1 class="title">header-title</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="user-status-container">
+                <ul>
+                    <li>NAME:<span id="userName"></span></li>
+                    <li>LV:<span id="Level"></span></li>
+                    <li>HITPOINT:<span id="Hitpoint"></span></li>
+                    <li>MAGIC:<span id="Magic"></span></li>
+                </ul>
+            </div>
+            <div class="monster">
+                <p class="monster-name">monsterA</p>
+                <img src="./images/monster1.png" class="monster-image">
+            </div>
+        </div>
+        <div class="message-area">
+            <span class="message">ここにテキストが入ります。</span>
+        </div>
+        <div class="commands-area">
+            <div class="commands-node-area">
+                <ul></ul>
+            </div>
+            <div class="button-area">
+                <p class="attack-button">こうげき</p>
+                <p class="magics-button">まほう</p>
+                <p class="skills-button">どうぐ</p>
+            </div>
+        </div>
+        
+    </main>
+    <script src="./main.js"></script>
+</body>
+</html>

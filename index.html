@@ -8,49 +8,25 @@
 </head>
 <body>
     <header>
-        
+        <h1 class="title"></h1>
     </header>
-   
     <main>
-
-        <p id="count"></p>
-        <div class="enemy-container">
-            <div class="enemy-wrapper">
-                <p id="enemyName"></p>
-                <p id="enemyHitpoint"></p>
-            </div>
-            <div class="enemy-image-wrapper">
-                <img id='enemyImage'>
-            </div>
-        </div>
-        <div class="message-container">
-            <p id="message" class="message">まもののけはいが たちこめている</p>
-        </div>
-        <div class="container">
-            <div class="status-wrapper" id="statusWrapper">
-                <p id="userLevel"></p>
-                <p id="userName"></p>
-                <p id="hitpoint" class="hitpoint"></p>
-                <p id="magic" class=""></p>
-            </div>
-            <div class="commands-wrapper" id="commandsWrapper">
-                <input type="button" value="攻撃" id="attackButton">
-                <input type="button" value="かいふく" id="recoverButton">
-                <input type="button" value="まほう" id="magicButton">
-            </div>
-        </div>
-        <div class="container" id="container">
-            <div class="item-wrapper" >
-                <ul>
-                    <span>所持数：</span>
-                    <li id="herbs"></li>
+            <div class="message-container"></div>
+            <div class="user-container">
+                <h4 class="user-title">しゅじんこうのなまえ</h4>
+                    <ul>
+                        <li>
+                            <input type="text" id="name" name="user_name" />
+                            <p class="text-counter-area"><span class="text-counter"></span>/10</p>
+                            <p class="alert-message"></p>
+                        </li>
+                        <li class="button">
+                            <button type="button" id="nameConfirm">かくてい</button>
+                        </li>
                     </ul>
             </div>
-         </div>
-        <div id="startButtonContainer" class="start-button-contaier">
-
-        </div>
+>>>>>>> develop
     </main>
-    <script src="./main.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
