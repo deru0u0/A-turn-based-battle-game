@@ -8,43 +8,30 @@
 </head>
 <body>
     <header>
-        <h1 class="title" id="Title">header-title</h1>
+        <h1 class="title">header-title</h1>
     </header>
     <main>
-        <div class="container"></div>
-        <div class="message-area">
-            <span class="message">ここにテキストが入ります。</span>
-        </div>
-        <div class="commands-area">
-            <div class="status-area">
-                <ul>
-                    <li>NAME:</li>
-                    <li>LV:</li>
-                    <li>HITPOINT</li>
-                    <li>MAGIC</li>
-                </ul>
+        <template id="messageContaner">
+            <div class="message-container"></div>
+        </template>
+        <template id="userTemplate">
+            <div class="user-container">
+                <h4 class="user-title">じょうほうをいれてください。</h4>
+                    <ul>
+                        <li>
+                            <label for="name">おなまえ</label>
+                            <input type="text" id="name" name="user_name" />
+                            <p class="text-counter-area"><span class="text-counter"></span>/10</p>
+                            <p class="alert-message"></p>
+                        </li>
+                        <li class="button">
+                            <button type="button">つぎへ</button>
+                        </li>
+                    </ul>
             </div>
-            <div class="button-area">
-                <p class="attack-button">こうげき</p>
-                <p class="magics-button">まほう</p>
-                <p class="skills-button">どうぐ</p>
-            </div>
-        </div>
-        <div class="magics-container">
-            <ul>
-                <li>まほう</li>
-                <li>まほう</li>
-                <li>まほう</li>
-            </ul>
-        </div>
-        <div class="tools-container">
-            <ul>
-                <li>どうぐ</li>
-                <li>どうぐ</li>
-                <li>どうぐ</li>
-            </ul>
-        </div>
+        </template>
+        
     </main>
-    <script src="./main.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
